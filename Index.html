@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>《好芯晴》LEO&TANK歡送會活動</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+    crossorigin="anonymous"></script>
+  <script>
+    var test_switch = 0;
+  </script>
+
+  <script type="text/javascript">
+    var my_coin = 17;
+    lock = true;
+    var my_coin1 = 0;
+    var my_coin2 = 0;
+    var my_coin3 = 0;
+    var my_coin4 = 0;
+    var my_coin5 = 0;
+    var my_coin6 = 0;
+  </script>
+  <!---->
+</head>
+
+<body>
+  <div id="app">
+    <div id="bg">
+      <!-- <a class="logo" href="https://www.sponline.com.tw/index.html" target="_blank"></a> -->
+      <div id="wrap">
+        <div class="slogan"></div>
+        <!--<div class="kv_ring absolute pc" style="opacity: 0.8;"> <img src="images/kv_ring-2.png" class="d-block r1 ring_ani"> </div>
+    <div class="kv_ring absolute pc" style="opacity: 0.8;"> <img src="images/kv_ring-2.png" class="d-block r2 ring_ani"> </div>
+    <div class="kv_ring absolute pc" style="opacity: 0.8;"> <img src="images/kv_ring-2.png" class="d-block r3 ring_ani"> </div>
+--->
+        <div class="main">
+          <div class="flash">
+            <div class="treasure tr_show">
+              <div class="tr_box">
+                <div class="gift g_show"></div>
+                <div class="gift_open"></div>
+                <div class="gold rotate"></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu">
+            <div class="button">
+              <!-- <a class="btn" >
+                <img src="images/but01.png">
+              </a>   -->
+              <button class="btn btn-warning" type="button" style="width: 650px;color:white"
+                v-on:click="slotStart">抽獎</button>
+
+              <div style="color: white;margin-top: 5px;">
+                <ul
+                  style="height: 100px;width: 100%;overflow-y:scroll;background-color:#eeeee4;color:black;padding: 10px;">
+                  <li v-for="(item, index) in memWinList" style="border-bottom:1px dashed black;display: flex;justify-content: center;">
+                    {{item}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <ul class="btn_1">
+              <li style="display: flex;justify-content: center;">剩餘抽獎次數: {{remainingCount}}</li>
+              <div style="display: flex;justify-content: center;padding: 20px;">
+                好芯晴活動說明:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;由於本次活動為會長與會員共同出資，一同歡送LEO與TANK希望能讓兩位會員留下美好回憶!
+                雖然活動獎品不是什麼特別貴重的物品，但都是大家共同的心意，也希望兩位會員前往國外工作能前程似錦，一帆風順~<br>
+
+              </div>
+              <img style="margin-left: 7%;" src="./images/bgn.png" width="300" height="300">
+              <!-- <li class="btn02 br1"><a href="javascript:game_start(2);"></a></li>
+              <li class="btn03 br1"><a href="javascript:game_start(3);"></a></li>
+              <li class="btn06"><a href="exchange.html"></a></li> -->
+            </ul>
+            <!-- <div class="point01">17 </div>
+            <div class="point02">0 </div>
+            <div class="point03">0 </div> -->
+
+          </div>
+          <!-- <ul class="small_box">
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(1);"></a>
+              </div>
+            </li>
+            <li class="box">
+              <p>一般福袋</p>
+              <div class="btn09"></div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(3);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(4);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(5);"></a>
+              </div>
+            </li>
+            <li class="box">
+              <p>一般福袋</p>
+              <div class="btn09"></div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(7);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(8);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(9);"></a>
+              </div>
+            </li>
+            <li class="box">
+              <p>一般福袋</p>
+              <div class="btn09"></div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(11);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(12);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(13);"></a>
+              </div>
+            </li>
+            <li class="box">
+              <p>一般福袋</p>
+              <div class="btn09"></div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(15);"></a>
+              </div>
+            </li>
+            <li class="box"><img src="images/bag.png" />
+              <div class="btn08">
+                <a href="javascript:gacha(16);"></a>
+              </div>
+            </li>
+          </ul> -->
+          <!-- <div class="bag_qty">
+
+            <div class="point05">0張</div>
+            <div class="point06">0張</div>
+            <div class="point07">0個</div>
+            <div class="point08">0個</div>
+            <div class="btn10"><a href="javascript:fubag(2);"></a></div>
+            <div class="btn11"><a href="javascript:fubag(3);"></a></div>
+            <div class="btn07"><a href="javascript:reset(1);"></a></div>
+          </div> -->
+        </div>
+      </div>
+      <!--頁尾FOOTER-->
+      <div id="footer"></div>
+      <!--頁尾FOOTER-->
+    </div>
+    <div id="dialog-message" style="display:none;" title=""></div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyChyEoaROcITOEnnPFarfpLP8JvD6rqX-c",
+    authDomain: "testproject-fd2d8.firebaseapp.com",
+    databaseURL: "https://testproject-fd2d8.firebaseio.com",
+    projectId: "testproject-fd2d8",
+    storageBucket: "testproject-fd2d8.appspot.com",
+    messagingSenderId: "1030523348601",
+    appId: "1:1030523348601:web:715d0ed8812ec48ce116a8",
+    measurementId: "G-WKHP08D8XH"
+  };
+
+  $(document).ready(function () {
+    //---------------------- n o t i f y 
+    let vm1 = new Vue({
+      el: '#app',
+      data: {
+        activeID: 'LEO&TANK歡送會活動',
+        maxRemainingCount: 3,
+        gameNick: '',
+        gameID: '',
+        remainingCount: 0,
+        db: null,
+        winList: ["小芯高歌一曲", "瓜姊笑話一則", "好芯晴團花甜美語音檔", "XG純白武器一支", "大官真曼一隻", "伊布++全套抵用券", "泡麵一箱", "好芯晴團花寫真一本"],
+        memWinList: []
+      },
+      methods: {
+        slotStart() {
+          if (this.remainingCount < 1) {
+            Swal.fire(
+              "抽獎次數不足", //標題 
+              "您已無抽獎次數!", //訊息內容(可省略)
+              "error"
+            );
+          } else if (this.gameNick == '') {
+            this.enterNickName();
+          } else {
+            let x = Math.floor(Math.random() * this.winList.length);
+
+            this.db.collection('winList').add({
+              'nickName': this.gameNick,
+              'activeID': this.activeID,
+              'win': this.winList[x]
+            }).then(() => {
+              this.remainingCount = this.remainingCount - 1;
+              this.db.collection('goodMood').doc(this.gameID).update({
+                activeCount: this.remainingCount
+              }).then(() => {
+                console.log('update data successful');
+              });
+
+              this.memWinList.push(this.winList[x]);
+              Swal.fire({
+                title: '恭喜獲得: ' + this.winList[x],
+                imageUrl: './images/win/'+this.winList[x]+'.jpg',
+                width: 600,
+                padding: '3em',
+                color: '#716add',
+                background: '#fff url(./images/trees.png)',
+                backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("./images/nyan-cat.gif")
+                    left top
+                    no-repeat
+                  `
+              })
+            }).catch(err => {
+              console.log('slotStart error');
+              alert("發生錯誤，請洽色射修正(3)!")
+            });
+          }
+        },
+        enterNickName() {
+          var _this = this;
+          Swal.fire({
+            title: '好芯晴會員您好，請輸入您的遊戲ID',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: false,
+            confirmButtonText: '確定',
+            cancelButtonText: "取消",
+            showLoaderOnConfirm: true,
+            preConfirm: (gameNick) => {
+              console.log("===============");
+              console.log(gameNick);
+              _this.getGoodMood(gameNick);
+              return gameNick;
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            console.log('=============');
+            console.log(result);
+            if (result.isConfirmed) {
+              console.log("設定成功");
+            } else {
+              console.log("取消");
+            }
+          })
+        },
+        getGoodMood(gameNick) {
+          if(gameNick=='')
+            return;
+          this.db.collection('goodMood').where('nickName', '==', gameNick).get().then(querySnapshot => {
+            console.log('======querySnapshot======');
+            console.log(querySnapshot.empty);
+            if (querySnapshot.empty) {
+              this.db.collection('goodMood')
+                .add({
+                  'nickName': gameNick,
+                  'activeCount': this.maxRemainingCount
+                })
+                .then((addData) => {
+                  console.log('add data');
+                  console.log(addData);
+                  document.cookie = 'nickName=' + gameNick;
+                  this.gameID = addData.id
+                  this.gameNick = gameNick;
+                  this.remainingCount = this.maxRemainingCount;
+                  return 'yes';
+                })
+                .catch(err => {
+                  alert("發生錯誤，請洽色射修正!(2)")
+                  return 'no';
+                });
+            } else {
+              document.cookie = 'nickName=' + gameNick;
+              querySnapshot.forEach(doc => {
+                console.log('======goodMood2======');
+                console.log(doc.id, doc.data());
+                this.gameID = doc.id;
+                this.gameNick = doc.data().nickName;
+                this.remainingCount = doc.data().activeCount;
+              });
+              this.db.collection('winList').where('nickName', '==', gameNick).where('activeID', '==', this.activeID).get().then(win => {
+                if (win.empty) {
+                  console.log('======noWin======');
+                } else {
+                  win.forEach(doc2 => {
+                    console.log('======win======');
+                    console.log(doc2.id, doc2.data());
+                    this.memWinList.push(doc2.data().win);
+                  });
+                }
+                return 'yes';
+              });
+            }
+          });
+        },
+        getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        },
+      },
+      mounted() {
+        firebase.initializeApp(firebaseConfig);
+        this.db = firebase.firestore();
+        console.log('=====nickName======');
+        console.log(this.getCookie('nickName'));
+        console.log(document.cookie);
+        var nickNameCookie = this.getCookie('nickName');
+        if (nickNameCookie == undefined) {
+          this.enterNickName();
+        } else {
+          this.getGoodMood(nickNameCookie);
+        }
+      },
+    })
+  })
+</script>
